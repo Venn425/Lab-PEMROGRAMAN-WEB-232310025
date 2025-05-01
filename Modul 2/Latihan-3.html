@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Utama</title>
+</head>
+
+<style>
+    body {
+        font-family: 'Times New Roman', serif;
+        margin: 0;
+        margin-bottom: 50px;
+        padding: 0;
+    }
+
+    .navigasi {
+        display: flex;
+        flex-direction: row;
+        background-color: #2196f3;
+        padding: 5px;
+        align-items: center;
+        gap: 20px;
+        color: white;
+    }
+
+    .ibik {
+        width: 30px;
+        height: auto;
+    }
+
+    .navigasi a {
+        color: white;
+        margin-right: 20px;
+    }
+
+    section {
+        background-color: #e3eaf7;
+        padding: 10px;
+        text-align: center;
+        font-style: italic;
+    }
+
+    .articles {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    article {
+      border: 1px solid #2196f3;
+      padding: 15px;
+      width: 400px;
+    }
+
+    .articles img {
+        width: 400px;
+        height: 200px;
+    }
+
+    .view {
+        color: #2196f3;
+        border: 1px solid #2196f3;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .view:hover {
+        color: white;
+        border: 1px solid #2196f3;
+        background-color: #2196f3;
+    }
+</style>
+
+<header>
+    <h1>Lab Pemograman Web</h1>
+</header>
+
+<body>
+    <div class="navigasi">
+        <img src="./assets/ibik1.png" class="ibik" alt="Logo"/>
+        <nav>
+            <a href="#">Home</a>
+            <a href="././My-Portofolio/Latihan-4.html">Profile</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    </div>
+
+    <section>
+        <blockquote style="font-size: 40px; margin-bottom: 50px;">
+          “The purpose<br style="margin-bottom: 20px;">of our lives<br style="margin-bottom: 20px;">is to be happy.”
+        </blockquote>
+        <p>- DALAI LAMA -</p>
+    </section>
+
+    <div class="articles">
+        <article>
+          <img src="./assets/prop (2).png" alt="Atom">
+          <p>An atom is the smallest unit of ordinary matter that forms a chemical element...</p>
+          <a href="./Latihan-1.html" class="view">View</a>
+          <span>9 mins</span>
+        </article>
+    
+        <article>
+          <img src="./assets/prop (1).png" alt="Wildlife">
+          <p>World Wildlife Fund is committed to endangered species protection...</p>
+          <a href="./Latihan-2.html" class="view">View</a>
+          <span>9 mins</span>
+        </article>
+    </div>
+</body>
+
+</html>
