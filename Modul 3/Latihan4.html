@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldo Akhir</title>
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f12f56, #ffffff);
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .cont {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      color: white;
+      background-color: crimson;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #output {
+      margin-top: 30px;
+      background: #ffa1a1;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    #output:empty {
+      display: none;
+    }
+</style>
+</head>
+
+<body>
+    <div class="cont">
+        <form id="hitungBunga">
+            <label>Saldo:</label>
+            <input type="number" id="saldo" name="saldo">
+            <label>Bunga:</label>
+            <input type="number" id="bunga" name="bunga">
+            <label>Waktu:</label>
+            <input type="number" id="waktu" name="waktu">
+            <button type="submit">Hitung</button>
+        </form>
+        <div id="output"></div>
+    </div>
+
+<script>
+    const hitungBunga = document.getElementById("hitungBunga");
+    const output = document.getElementById("output");
+
+    hitungBunga.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let saldo = parseFloat(document.getElementById("saldo").value);
+        let bunga = parseFloat(document.getElementById("bunga").value);
+        const waktu = parseInt(document.getElementById("waktu").value);
+
+        bunga = bunga/100;
+        let total = "";
+
+        for (let i = 1; i <= waktu; i++) {
+            saldo += saldo * bunga;
+            total += `Saldo Bulan ${i} = Rp. ${saldo.toFixed(0)}<br>`;
+        }
+
+        output.innerHTML = total;
+    });
+</script>
+</body>
+</html>

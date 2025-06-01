@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Mahasiswa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #e66060, #ffffff);
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 16px;
+    }
+
+    #output {
+      margin-top: 30px;
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    #output:empty {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Form Data Mahasiswa</h2>
+
+    <form id="formMahasiswa">
+      <label for="nim">NIM:</label>
+      <input type="text" id="nim" name="nim" required>
+
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label>Jenis Kelamin:</label>
+      <input type="radio" id="jk_l" name="jenis_kelamin" value="Laki-laki" required> Laki-laki
+      <input type="radio" id="jk_p" name="jenis_kelamin" value="Perempuan"> Perempuan
+
+      <label for="agama">Agama:</label>
+      <select id="agama" name="agama" required>
+        <option value="">Pilih Agama</option>
+        <option>Islam</option>
+        <option>Kristen</option>
+        <option>Katolik</option>
+        <option>Hindu</option>
+        <option>Buddha</option>
+        <option>Konghucu</option>
+      </select>
+
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="">Pilih Status</option>
+        <option>Aktif</option>
+        <option>Cuti</option>
+        <option>Lulus</option>
+      </select>
+
+      <label for="jurusan">Jurusan:</label>
+      <input type="text" id="jurusan" name="jurusan" required>
+
+      <label for="komentar">Komentar:</label>
+      <textarea id="komentar" name="komentar" rows="4"></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("formMahasiswa");
+    const output = document.getElementById("output");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nim = document.getElementById("nim").value;
+      const nama = document.getElementById("nama").value;
+      const jenisKelamin = document.querySelector('input[name="jenis_kelamin"]:checked')?.value || '';
+      const agama = document.getElementById("agama").value;
+      const status = document.getElementById("status").value;
+      const jurusan = document.getElementById("jurusan").value;
+      const komentar = document.getElementById("komentar").value;
+
+      output.innerHTML = `
+        <h3>Data Diterima:</h3>
+        <p><b>NIM:</b> ${nim}</p>
+        <p><b>Nama:</b> ${nama}</p>
+        <p><b>Jenis Kelamin:</b> ${jenisKelamin}</p>
+        <p><b>Agama:</b> ${agama}</p>
+        <p><b>Status:</b> ${status}</p>
+        <p><b>Jurusan:</b> ${jurusan}</p>
+        <p><b>Komentar:</b> ${komentar}</p>
+      `;
+    });
+  </script>
+
+</body>
+</html>

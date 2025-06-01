@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Pesan Tiket</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #1b39ff, #2a2a2a);
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+
+    .radio-member {
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+    .radio-member label {
+      font-weight: normal;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .radio-member input[type="radio"] {
+      margin-right: 6px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 30px;
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    #output:empty {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Pesan Tiket</h2>
+
+    <form id="formPemesanan">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required />
+
+      <label for="tujuan">Tujuan:</label>
+      <select id="tujuan" name="tujuan" required>
+        <option value="">Pilih Tujuan</option>
+        <option>Jakarta</option>
+        <option>Solo</option>
+        <option>Surabaya</option>
+      </select>
+
+      <label for="kelas">Kelas:</label>
+      <select id="kelas" name="kelas" required>
+        <option value="">Pilih Kelas</option>
+        <option>Eksekutif</option>
+        <option>Bisnis</option>
+        <option>Ekonomi</option>
+      </select>
+
+      <label for="tiket">Jumlah Tiket:</label>
+      <input type="number" id="tiket" name="tiket" required />
+
+      <label>Jenis Keanggotaan:</label>
+      <div class="radio-member">
+        <label>
+          <input type="radio" id="member" name="member" value="Member" required /> Member
+        </label>
+        <label>
+          <input type="radio" id="non_member" name="member" value="Non-Member" /> Non-Member
+        </label>
+      </div>
+
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("formPemesanan");
+    const output = document.getElementById("output");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const tujuan = document.getElementById("tujuan").value;
+      const kelas = document.getElementById("kelas").value;
+      const tiket = document.getElementById("tiket").value;
+      const member = document.querySelector('input[name="member"]:checked')?.value || '';
+    
+      const priceList = {
+        Jakarta: {
+            Eksekutif: 70000,
+            Bisnis: 40000,
+            Ekonomi: 10000
+        },
+        Solo: {
+            Eksekutif: 80000,
+            Bisnis: 50000,
+            Ekonomi: 20000
+        },
+        Surabaya: {
+            Eksekutif: 90000,
+            Bisnis: 60000,
+            Ekonomi: 30000
+        }
+      };
+
+      let hargaTiket = priceList[tujuan]?.[kelas] || 0;
+
+      let subTotal = tiket*hargaTiket;
+
+      let diskon = 0;
+      if(member === "Member"){
+        diskon = subTotal*0.1;
+      } else{
+        diskon = 0;
+      }
+
+      totalBayar = subTotal-diskon;
+
+      output.innerHTML = `
+        <h3>Data Diterima:</h3>
+        <p><b>Nama:</b> ${nama}</p>
+        <p><b>Tujuan:</b> ${tujuan}</p>
+        <p><b>Kelas:</b> ${kelas}</p>
+        <p><b>Jumlah Tiket:</b> ${tiket}</p>
+        <p><b>Harga Tiket:</b> Rp${hargaTiket.toLocaleString("id-ID")}</p>
+        <p><b>Subtotal:</b> Rp${subTotal.toLocaleString("id-ID")}</p>
+        <p><b>Diskon:</b> Rp${diskon.toLocaleString("id-ID")}</p>
+        <p><b>Total Bayar:</b> Rp${totalBayar.toLocaleString("id-ID")}</p>
+      `;
+    });
+  </script>
+
+</body>
+</html>
